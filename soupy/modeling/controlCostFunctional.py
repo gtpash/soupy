@@ -88,7 +88,7 @@ class DeterministicControlCostFunctional(ControlCostFunctional):
         self.grad_objective = self.model.generate_vector(CONTROL)
         self.q_bar = 0 
 
-        self.comm = self.u.mpi_comm()
+        self.comm = self.model.problem.Vh[STATE].mesh().mpi_comm()
         self.mpi_size = self.comm.Get_size()
 
         self.rhs_fwd = self.model.generate_vector(STATE)
