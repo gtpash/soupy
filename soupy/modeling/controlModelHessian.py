@@ -42,6 +42,15 @@ class ControlModelHessian:
         """
         self.model.init_control(z)
 
+    def inner(self, x, y):
+        """
+        Perform the inner product between :code:`x` and :code:`y` in the norm induced by the reduced
+        Hessian :math:`H,\\,(x, y)_H = x' H y`.
+        """
+        Ay = self.model.generate_vector(CONTROL)
+        Ay.zero()
+        self.mult(y,Ay)
+        return x.inner(Ay)
 
     def mult(self, zhat, Hzhat):
         """
