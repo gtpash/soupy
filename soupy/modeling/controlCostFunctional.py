@@ -159,6 +159,8 @@ class DeterministicControlCostFunctional(ControlCostFunctional):
             self.model.evalGradientControl(self.x, self.grad_objective)
             self.has_adjoint_solve = True
 
+
+        self.model.setLinearizationPoint(self.x)
         self.has_forward_solve = True
 
 
@@ -212,7 +214,7 @@ class DeterministicControlCostFunctional(ControlCostFunctional):
         
         .. note:: Assumes :code:`self.cost` has been called with :code:`order >= 2`
         """
-        self.model.setLinearizationPoint(self.x)
+        # self.model.setLinearizationPoint(self.x)
         self.model.applyCz(zhat, self.rhs_fwd)
         self.model.solveFwdIncremental(self.uhat, self.rhs_fwd)
         self.model.applyWuu(self.uhat, self.rhs_adj)
